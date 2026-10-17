@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CismaFree – Simple systems that save small businesses hours every week</title>
+<title>CismaFree – Simple software for small businesses, set up for you</title>
 <meta name="description" content="We help clubs, coaches, cleaning companies and other small businesses replace paper, spreadsheets and WhatsApp groups with simple systems that save hours every week.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -165,6 +165,16 @@
   .steps h3 { margin-top: 0.4rem; font-size: 1.25rem; font-weight: 600; }
   .steps p { margin-top: 0.4rem; color: var(--muted); }
 
+  .proof { border-bottom: 1px solid var(--line); background: var(--bg); }
+  .proof-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding-top: 1.6rem; padding-bottom: 1.6rem; }
+  .proof-list li { border-left: 3px solid var(--accent); padding-left: 0.9rem; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
+  .proof-list strong { display: block; font-family: "Sora", "Instrument Sans", system-ui, sans-serif; font-size: 1.35rem; color: var(--ink); }
+  .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
+  .about .intro + .intro { margin-top: 1rem; }
+  .pillars { list-style: none; padding: 0; display: grid; gap: 1rem; }
+  .pillars li { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem 1.4rem; }
+  .pillars h3 { font-size: 1.15rem; font-weight: 600; }
+  .pillars p { margin-top: 0.35rem; color: var(--muted); }
   .band { background: var(--band); color: var(--band-text); border-radius: 24px; padding: 3.5rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: center; }
   .band h2 { color: var(--band-text); }
   .band p { margin-top: 0.8rem; color: var(--band-muted); font-size: 1.1rem; max-width: 46ch; }
@@ -202,7 +212,7 @@
   }
   @media (max-width: 760px) {
     .hero { padding: 2.5rem 0 3.5rem; }
-    .hero .wrap, .tools, .steps, .band, .contact, .form { grid-template-columns: 1fr; }
+    .hero .wrap, .tools, .steps, .band, .contact, .form, .proof-list, .about { grid-template-columns: 1fr; }
     .form { padding: 1.4rem; }
     .send-row .btn { width: 100%; }
     .pains, .sectors { grid-template-columns: 1fr; }
@@ -251,8 +261,8 @@
   <section class="hero" aria-labelledby="hero-title">
     <div class="wrap">
       <div>
-        <h1 id="hero-title" data-i18n="h1">Less admin. More time for the work you love.</h1>
-        <p class="lead" data-i18n="lead">We help small businesses swap paper, spreadsheets and endless WhatsApp messages for simple systems that save hours every week. We set everything up for you, so there's nothing technical to learn.</p>
+        <h1 id="hero-title" data-i18n="h1">Simple software for small businesses, set up for you.</h1>
+        <p class="lead" data-i18n="lead">Swap paper registers, spreadsheets and WhatsApp chaos for easy tools that save hours every week. We do the setup, so there's nothing technical to learn.</p>
         <div class="actions">
           <a class="btn" href="#contact" data-i18n="btn_chat">Book a free chat</a>
           <a class="btn ghost" href="#who" data-i18n="btn_who">Who we help</a>
@@ -267,6 +277,14 @@
       </div>
     </div>
   </section>
+
+  <div class="proof" aria-label="Our experience">
+    <ul class="wrap proof-list">
+      <li><strong data-i18n="pf1t">7 years</strong> <span data-i18n="pf1s">getting businesses up and running on new software</span></li>
+      <li><strong data-i18n="pf2t">10+ years</strong> <span data-i18n="pf2s">in customer service</span></li>
+      <li><strong data-i18n="pf3t">Global brands</strong> <span data-i18n="pf3s">experience with teams in drinks, batteries and water treatment</span></li>
+    </ul>
+  </div>
 
   <section class="mist" aria-labelledby="pains-title">
     <div class="wrap">
@@ -307,7 +325,7 @@
             <li data-i18n="t2">See attendance by class and by member</li>
             <li data-i18n="t3">Set up for you, ready in days</li>
           </ul>
-          <a class="btn" href="lineup.html" data-i18n="lineup_btn">Find out more about LineUp</a>
+          <a class="btn" href="https://lineup.cismafree.com/" data-i18n="lineup_btn">Find out more about LineUp</a>
         </article>
         <article class="tool soon">
           <span class="tag" data-i18n="tag_made">Made for you</span>
@@ -327,6 +345,21 @@
         <li><h3 data-i18n="st2t">We set it up</h3><p data-i18n="st2p">We pick or build the right tool, set it up, and show you and your team how it works.</p></li>
         <li><h3 data-i18n="st3t">You get time back</h3><p data-i18n="st3p">Less admin, and more time for the work you actually enjoy.</p></li>
       </ol>
+    </div>
+  </section>
+
+  <section id="about" class="mist" aria-labelledby="about-title">
+    <div class="wrap about">
+      <div>
+        <h2 id="about-title" data-i18n="ab_h">Who's behind CismaFree</h2>
+        <p class="intro" data-i18n="ab_p1">CismaFree is built on years of helping businesses start using new software, and keep using it. That work covered manufacturing, energy and asset management, for teams from fast-growing start-ups to multinationals in drinks, batteries and water treatment.</p>
+        <p class="intro" data-i18n="ab_p2">Now we bring the same care to small businesses: simple tools, set up properly, with a real person to help when you need it.</p>
+      </div>
+      <ul class="pillars">
+        <li><h3 data-i18n="pl1t">Getting you started</h3><p data-i18n="pl1p">We set everything up and show your team how it works, so it's used from day one, not left in a drawer.</p></li>
+        <li><h3 data-i18n="pl2t">Keeping it working</h3><p data-i18n="pl2p">We check in, listen and fix what gets in the way, the way we've looked after customers for years.</p></li>
+        <li><h3 data-i18n="pl3t">Helping you grow</h3><p data-i18n="pl3p">Fewer people slipping away, payments chased, and clearer numbers to plan with.</p></li>
+      </ul>
     </div>
   </section>
 
@@ -391,8 +424,8 @@ const T = {
   pt: {
     title: "CismaFree – Sistemas simples que economizam horas toda semana",
     nav_cta: "Diagnóstico grátis",
-    h1: "Menos papelada. Mais tempo para o que você ama.",
-    lead: "Ajudamos pequenas empresas a trocar papel, planilhas e mensagens sem fim no WhatsApp por sistemas simples que economizam horas toda semana. Nós configuramos tudo para você, sem nada técnico para aprender.",
+    h1: "Software simples para pequenas empresas, configurado para você.",
+    lead: "Troque listas em papel, planilhas e o caos do WhatsApp por ferramentas fáceis que economizam horas toda semana. Nós fazemos a configuração, sem nada técnico para aprender.",
     btn_chat: "Agende uma conversa grátis",
     btn_who: "Para quem é",
     who_line: "Para clubes, treinadores, empresas de limpeza e outras pequenas equipes.",
@@ -403,6 +436,15 @@ const T = {
     r1t: "Treino de futebol de sábado", r1s: "<em>22 presentes</em>",
     r2t: "Limpeza do escritório, Unidade 4", r2s: "<em>Feita</em> às 7h42",
     r3t: "Mensalidades", r3s: '<em class="warn">3 para cobrar</em>',
+    pf1t: "7 anos", pf1s: "colocando empresas para funcionar com novos softwares",
+    pf2t: "Mais de 10 anos", pf2s: "em atendimento ao cliente",
+    pf3t: "Marcas globais", pf3s: "experiência com equipes dos setores de bebidas, baterias e tratamento de água",
+    ab_h: "Quem está por trás da CismaFree",
+    ab_p1: "A CismaFree nasce de anos ajudando empresas a começar a usar novos softwares, e a continuar usando. Esse trabalho passou por indústria, energia e gestão de ativos, com equipes de startups em crescimento a multinacionais de bebidas, baterias e tratamento de água.",
+    ab_p2: "Agora levamos o mesmo cuidado para pequenas empresas: ferramentas simples, bem configuradas, com uma pessoa de verdade para ajudar quando você precisar.",
+    pl1t: "Colocando você para rodar", pl1p: "Configuramos tudo e mostramos à sua equipe como funciona, para ser usado desde o primeiro dia, e não esquecido na gaveta.",
+    pl2t: "Mantendo tudo funcionando", pl2p: "Acompanhamos, ouvimos e resolvemos o que atrapalha, do jeito que cuidamos de clientes há anos.",
+    pl3t: "Ajudando você a crescer", pl3p: "Menos clientes indo embora, pagamentos cobrados e números mais claros para planejar.",
     pains_h: "Você abriu um negócio para treinar, limpar ou construir. Não para cuidar de papelada.",
     p1t: "Papel e pranchetas", p1s: "Listas de presença, folhas de ponto e checklists que se perdem ou nunca são arquivados.",
     p2t: "Caos no WhatsApp", p2s: "Mensagens importantes perdidas nos grupos.",
