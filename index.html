@@ -3,385 +3,394 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>CismaFree – Simple software for small businesses, set up for you</title>
-<meta name="description" content="We help clubs, coaches, cleaning companies and other small businesses replace paper, spreadsheets and WhatsApp groups with simple systems that save hours every week.">
+<title>CismaFree – Software that takes the worry out of running a small business</title>
+<meta name="description" content="CismaFree is a software studio for small businesses. We build simple tools for different kinds of business, set them up for you and look after them.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Schibsted+Grotesk:wght@400;500;600;700;800&family=Oswald:wght@600;700&family=Work+Sans:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root {
-    --ink: #0E1B2E;
-    --text: #0E1B2E;
-    --muted: #4A5872;
-    --bg: #FFFFFF;
-    --mist: #F3F5F8;
-    --line: #E1E6EE;
-    --accent: #0E9F6E;
-    --accent-soft: #E3F5EE;
-    --note: #FFD447;
-    --band: #0E1B2E;
-    --band-text: #FFFFFF;
-    --band-muted: #B7C2D4;
-    --btn: #0E1B2E;
+    --paper: #FFFFFF;
+    --wash: #F2F4F7;
+    --ink: #14213D;
+    --text: #1C2740;
+    --muted: #55607A;
+    --line: #DDE2EA;
+    --accent: #0F8A62;
+    --accent-soft: #E2F3EC;
+    --btn: #14213D;
     --btn-text: #FFFFFF;
+    --err: #B4410F;
+    /* LineUp's own brand */
+    --lu-ink: #0A0B0C;
+    --lu-line: #2C2F33;
+    --lu-white: #F4F4F5;
+    --lu-muted: #A3A6AA;
+    --lu-orange: #F47A12;
     color-scheme: light;
+    box-sizing: border-box;
+    padding-top: env(safe-area-inset-top, 0px);
+    padding-bottom: env(safe-area-inset-bottom, 0px);
   }
   @media (prefers-color-scheme: dark) {
     :root {
-      --ink: #EEF2F8;
-      --text: #EEF2F8;
-      --muted: #A5B1C5;
-      --bg: #0F1826;
-      --mist: #162133;
-      --line: #26334A;
-      --accent: #3DCC97;
-      --accent-soft: #173A30;
-      --note: #E9C23D;
-      --band: #162133;
-      --band-text: #EEF2F8;
-      --band-muted: #A5B1C5;
-      --btn: #EEF2F8;
-      --btn-text: #0F1826;
+      --paper: #0D1424;
+      --wash: #141D30;
+      --ink: #EEF1F6;
+      --text: #DCE2EC;
+      --muted: #9AA6BC;
+      --line: #253149;
+      --accent: #41C795;
+      --accent-soft: #16352B;
+      --btn: #EEF1F6;
+      --btn-text: #0D1424;
+      --err: #F08A5D;
       color-scheme: dark;
     }
   }
-  * { box-sizing: border-box; margin: 0; }
-  html { scroll-behavior: smooth; }
+  *, *::before, *::after { box-sizing: border-box; margin: 0; }
+  html { scroll-behavior: smooth; scroll-padding-top: calc(env(safe-area-inset-top, 0px) + 80px); }
   body {
-    background: var(--bg); color: var(--text);
-    font: 400 1.0625rem/1.65 "Instrument Sans", system-ui, -apple-system, "Segoe UI", sans-serif;
-    padding: env(safe-area-inset-top, 0) 0 env(safe-area-inset-bottom, 0);
+    background: var(--paper); color: var(--text);
+    font: 400 1.0625rem/1.6 "Schibsted Grotesk", system-ui, -apple-system, "Segoe UI", sans-serif;
+    -webkit-font-smoothing: antialiased;
   }
-  h1, h2, h3, .logo { font-family: "Sora", "Instrument Sans", system-ui, sans-serif; color: var(--ink); line-height: 1.15; }
+  body::before { content: ""; position: fixed; inset: 0 0 auto; height: env(safe-area-inset-top, 0px); z-index: 20; background: var(--paper); }
+  h1, h2, h3 { color: var(--ink); line-height: 1.12; font-weight: 700; }
   a { color: inherit; }
+  img, svg { max-width: 100%; }
   :focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; border-radius: 6px; }
-  .wrap { max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+  .wrap { max-width: 1160px; margin: 0 auto; padding: 0 1.5rem; }
 
   .btn {
-    display: inline-block; background: var(--btn); color: var(--btn-text);
-    font-weight: 600; text-decoration: none; padding: 0.85rem 1.5rem; border-radius: 10px;
+    display: inline-flex; align-items: center; justify-content: center; min-height: 48px;
+    background: var(--btn); color: var(--btn-text); font: 600 1rem "Schibsted Grotesk", system-ui, sans-serif;
+    text-decoration: none; padding: 0.8rem 1.4rem; border-radius: 8px; border: 0; cursor: pointer;
+    transition: background 0.15s, color 0.15s;
   }
   .btn:hover { background: var(--accent); color: #fff; }
-  .btn.ghost { background: transparent; color: var(--ink); border: 1.5px solid var(--line); }
-  .btn.ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn.ghost { background: transparent; color: var(--ink); box-shadow: inset 0 0 0 1.5px var(--line); }
+  .btn.ghost:hover { box-shadow: inset 0 0 0 1.5px var(--accent); color: var(--accent); }
 
   /* Header */
-  header { border-bottom: 1px solid var(--line); }
-  header .wrap { display: flex; justify-content: space-between; align-items: center; height: 72px; }
-  .logo { font-weight: 700; font-size: 1.35rem; text-decoration: none; }
-  .logo b { color: var(--accent); font-weight: 700; }
-  header .btn { padding: 0.6rem 1.1rem; font-size: 0.95rem; }
+  header { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 10; background: color-mix(in srgb, var(--paper) 92%, transparent); backdrop-filter: blur(8px); border-bottom: 1px solid var(--line); }
+  .bar { display: flex; align-items: center; gap: 2rem; height: 72px; }
+  .logo { display: flex; align-items: center; gap: 0.6rem; text-decoration: none; font-weight: 800; font-size: 1.3rem; color: var(--ink); letter-spacing: -0.02em; }
+  .logo svg { width: 30px; height: 30px; flex: none; }
+  nav { display: flex; gap: 1.6rem; margin-left: auto; }
+  nav a { text-decoration: none; color: var(--muted); font-weight: 500; font-size: 0.97rem; }
+  nav a:hover { color: var(--ink); }
+  .header-right { display: flex; align-items: center; gap: 0.75rem; }
+  .lang { display: flex; border-radius: 8px; box-shadow: inset 0 0 0 1.5px var(--line); overflow: hidden; }
+  .lang button { font: 600 0.85rem "Schibsted Grotesk", system-ui, sans-serif; color: var(--muted); background: transparent; border: 0; padding: 0 0.7rem; min-height: 40px; cursor: pointer; }
+  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--paper); }
+  header .btn { min-height: 40px; padding: 0.5rem 1rem; font-size: 0.95rem; }
 
   /* Hero */
-  .hero { padding: 4.5rem 0 5rem; }
-  .hero .wrap { display: grid; grid-template-columns: 1.05fr 1fr; gap: 3.5rem; align-items: center; }
-  .hero h1 { font-weight: 700; font-size: clamp(2.3rem, 5.2vw, 3.7rem); letter-spacing: -0.03em; max-width: 15ch; }
-  .lead { margin-top: 1.25rem; font-size: 1.2rem; color: var(--muted); max-width: 38ch; }
-  .actions { margin-top: 2rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
-  .who { margin-top: 1.75rem; font-size: 0.95rem; color: var(--muted); }
+  .hero { padding: 5rem 0 5.5rem; }
+  .hero-grid { display: grid; grid-template-columns: 1.15fr 1fr; gap: 4rem; align-items: center; }
+  .kicker { color: var(--accent); font-weight: 600; }
+  .hero h1 { margin-top: 1rem; font-size: clamp(2.4rem, 5.4vw, 4.1rem); font-weight: 800; letter-spacing: -0.035em; line-height: 1.04; max-width: 14ch; }
+  .lead { margin-top: 1.4rem; font-size: 1.2rem; color: var(--muted); max-width: 40ch; }
+  .actions { margin-top: 2.2rem; display: flex; gap: 0.75rem; flex-wrap: wrap; }
 
-  /* Before / after visual */
-  .visual { position: relative; min-height: 360px; }
-  .note {
-    position: absolute; width: 190px; padding: 0.9rem 1rem 1.1rem;
-    background: var(--note); color: #0E1B2E;
-    font: 600 0.98rem/1.35 "Instrument Sans", system-ui, sans-serif;
-    box-shadow: 0 12px 20px -14px rgba(14, 27, 46, 0.6);
+  /* The worry list: the page's one moment of motion */
+  .worries { background: var(--wash); border-radius: 20px; padding: 2rem 2rem 1.6rem; }
+  .worries-head { font-weight: 600; color: var(--muted); font-size: 0.95rem; }
+  .worries ul { list-style: none; padding: 0; margin-top: 1rem; }
+  .worries li { padding: 1rem 0; border-top: 1px solid var(--line); font-size: 1.12rem; font-weight: 500; color: var(--ink); }
+  .worries li span {
+    background-image: linear-gradient(var(--accent), var(--accent)); background-repeat: no-repeat;
+    background-position: 0 56%; background-size: 0 2px; animation: strike 0.5s ease-out forwards;
   }
-  .note { width: 220px; font-size: 1.05rem; padding: 1.1rem 1.2rem 1.3rem; }
-  .note:nth-of-type(1) { top: 10px; left: 4%; transform: rotate(-6deg); }
-  .note:nth-of-type(2) { top: 95px; right: 4%; transform: rotate(4deg); }
-  .note:nth-of-type(3) { top: 215px; left: 22%; transform: rotate(-2deg); }
-  .note span {
-    background-image: linear-gradient(#0E1B2E, #0E1B2E); background-repeat: no-repeat;
-    background-position: 0 58%; background-size: 0 2px; animation: strike 0.45s ease-out forwards;
-  }
-  .note:nth-of-type(1) span { animation-delay: 0.6s; }
-  .note:nth-of-type(2) span { animation-delay: 1s; }
-  .note:nth-of-type(3) span { animation-delay: 1.4s; }
-
-  .panel {
-    position: absolute; top: 40px; right: 0; width: min(330px, 70%);
-    background: var(--bg); border: 1px solid var(--line); border-radius: 16px;
-    box-shadow: 0 24px 48px -24px rgba(14, 27, 46, 0.35);
-    padding: 1.25rem; opacity: 0; transform: translateY(8px);
-    animation: rise 0.5s ease-out 1.9s forwards;
-  }
-  .panel-head { display: flex; justify-content: space-between; align-items: baseline; }
-  .panel-title { font-weight: 600; }
-  .panel-sub { font-size: 0.85rem; color: var(--muted); }
-  .count { margin-top: 1rem; font-family: "Sora", sans-serif; font-size: 2.2rem; font-weight: 700; color: var(--ink); }
-  .count small { font: 500 0.95rem "Instrument Sans", sans-serif; color: var(--muted); margin-left: 0.4rem; }
-  .bar { height: 8px; border-radius: 99px; background: var(--mist); margin-top: 0.6rem; overflow: hidden; }
-  .bar i { display: block; height: 100%; width: 82%; background: var(--accent); border-radius: 99px; }
-  .people { list-style: none; padding: 0; margin-top: 1rem; font-size: 0.92rem; }
-  .people li { display: flex; justify-content: space-between; padding: 0.45rem 0; border-top: 1px solid var(--line); }
-  .people em { font-style: normal; color: var(--accent); font-weight: 600; }
-
+  .worries li:nth-child(1) span { animation-delay: 0.5s; }
+  .worries li:nth-child(2) span { animation-delay: 0.9s; }
+  .worries li:nth-child(3) span { animation-delay: 1.3s; }
+  .worries li:nth-child(4) span { animation-delay: 1.7s; }
+  .sorted { display: flex; align-items: center; gap: 0.6rem; padding-top: 1.1rem; border-top: 1px solid var(--line); font-weight: 600; color: var(--accent); opacity: 0; animation: show 0.4s ease-out 2.3s forwards; }
+  .sorted svg { width: 22px; height: 22px; flex: none; }
   @keyframes strike { to { background-size: 100% 2px; } }
-  @keyframes rise { to { opacity: 1; transform: none; } }
+  @keyframes show { to { opacity: 1; } }
   @media (prefers-reduced-motion: reduce) {
-    .note span { animation: none; background-size: 100% 2px; }
-    .panel { animation: none; opacity: 1; transform: none; }
+    .worries li span { animation: none; background-size: 100% 2px; }
+    .sorted { animation: none; opacity: 1; }
   }
 
   /* Sections */
-  section { padding: 5rem 0; }
-  .mist { background: var(--mist); }
-  section h2 { font-weight: 700; font-size: clamp(1.75rem, 3.6vw, 2.4rem); letter-spacing: -0.02em; max-width: 22ch; }
-  .intro { margin-top: 0.75rem; color: var(--muted); font-size: 1.1rem; max-width: 52ch; }
+  section { padding: 4.5rem 0; }
+  .wash { background: var(--wash); }
+  .sec-head { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem 4rem; align-items: end; }
+  .sec-head h2 { font-size: clamp(1.9rem, 3.8vw, 2.7rem); letter-spacing: -0.025em; max-width: 18ch; }
+  .sec-head p { color: var(--muted); font-size: 1.1rem; max-width: 46ch; }
 
-  .pains { list-style: none; padding: 0; margin-top: 2.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-  .pains li { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 1.4rem; }
-  .pains strong { display: block; font-weight: 600; color: var(--ink); }
-  .pains span { display: block; margin-top: 0.35rem; color: var(--muted); font-size: 0.95rem; }
+  /* Product family */
+  .family { margin-top: 3rem; display: grid; grid-template-columns: 1.7fr 1fr; gap: 1.25rem; }
+  .lineup {
+    background: var(--lu-ink); color: var(--lu-white); border-radius: 20px; padding: 2.4rem;
+    display: grid; grid-template-columns: 1.2fr 1fr; gap: 2rem; font-family: "Work Sans", system-ui, sans-serif;
+  }
+  .lu-top { display: flex; align-items: center; justify-content: space-between; gap: 1rem; flex-wrap: wrap; }
+  .lu-mark { display: flex; align-items: center; gap: 0.55rem; font: 700 1.9rem/1 "Oswald", "Arial Narrow", sans-serif; letter-spacing: 0.01em; }
+  .lu-mark i { display: grid; place-items: center; width: 34px; height: 34px; border-radius: 8px; background: var(--lu-orange); }
+  .lu-mark i svg { width: 18px; height: 18px; }
+  .lu-mark b { color: var(--lu-orange); font-weight: 700; }
+  .live { display: inline-flex; align-items: center; gap: 0.45rem; font: 500 0.85rem "Work Sans", sans-serif; color: var(--lu-white); background: var(--lu-line); padding: 0.3rem 0.75rem; border-radius: 99px; }
+  .live::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: #3DDC84; }
+  .lineup h3 { margin-top: 1.4rem; color: var(--lu-white); font: 700 1.6rem/1.15 "Oswald", "Arial Narrow", sans-serif; letter-spacing: 0.005em; }
+  .lineup p { margin-top: 0.6rem; color: var(--lu-muted); }
+  .lu-ticks { list-style: none; padding: 0; margin-top: 1.2rem; }
+  .lu-ticks li { position: relative; padding-left: 1.5rem; margin-top: 0.45rem; }
+  .lu-ticks li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 0.6rem; height: 0.32rem; border-left: 2px solid var(--lu-orange); border-bottom: 2px solid var(--lu-orange); transform: rotate(-45deg); }
+  .lu-btn { margin-top: 1.6rem; background: var(--lu-orange); color: var(--lu-ink); font-family: "Work Sans", sans-serif; }
+  .lu-btn:hover { background: var(--lu-white); color: var(--lu-ink); }
 
-  .sectors { margin-top: 2.5rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
-  .sector { border-top: 2px solid var(--accent); padding-top: 1.1rem; }
+  .phone { align-self: center; justify-self: center; width: 210px; border-radius: 30px; border: 6px solid var(--lu-line); background: #151719; padding: 1.4rem 1rem 1.2rem; text-align: center; }
+  .phone small { display: block; color: var(--lu-muted); font-size: 0.78rem; }
+  .phone strong { display: block; margin-top: 0.3rem; font: 600 1.15rem "Oswald", sans-serif; color: var(--lu-white); }
+  .pin { display: flex; justify-content: center; gap: 0.5rem; margin-top: 1.1rem; }
+  .pin span { width: 14px; height: 14px; border-radius: 50%; background: var(--lu-orange); }
+  .pin span:last-child { background: transparent; box-shadow: inset 0 0 0 2px var(--lu-line); }
+  .keys { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0.4rem; margin-top: 1.1rem; }
+  .keys span { padding: 0.45rem 0; border-radius: 8px; background: var(--lu-line); color: var(--lu-white); font: 500 0.95rem "Work Sans", sans-serif; }
+  .checked { margin-top: 1rem; padding: 0.55rem; border-radius: 8px; background: rgba(244, 122, 18, 0.14); color: var(--lu-orange); font: 600 0.85rem "Work Sans", sans-serif; }
+
+  .next { border-radius: 20px; padding: 2.2rem; box-shadow: inset 0 0 0 1.5px var(--line); background: var(--paper); display: flex; flex-direction: column; }
+  .slot { width: 46px; height: 46px; border-radius: 10px; border: 2px dashed var(--line); display: grid; place-items: center; color: var(--muted); font-size: 1.5rem; font-weight: 500; }
+  .next h3 { margin-top: 1.4rem; font-size: 1.45rem; letter-spacing: -0.015em; }
+  .next p { margin-top: 0.6rem; color: var(--muted); }
+  .next a.link { margin-top: auto; padding-top: 1.5rem; font-weight: 600; color: var(--accent); }
+
+
+  /* Who we help */
+  .sectors { margin-top: 2rem; display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.25rem; }
+  .sector { background: var(--paper); border-radius: 16px; padding: 1.6rem; display: flex; flex-direction: column; }
   .sector h3 { font-size: 1.15rem; font-weight: 600; }
-  .sector p { margin-top: 0.45rem; color: var(--muted); font-size: 0.97rem; }
-  .rows { list-style: none; padding: 0; margin-top: 0.9rem; }
-  .rows li { padding: 0.7rem 0; border-top: 1px solid var(--line); }
-  .rows b { display: block; font-weight: 600; font-size: 0.95rem; }
-  .rows span { font-size: 0.88rem; color: var(--muted); }
-  .rows em { font-style: normal; color: var(--accent); font-weight: 600; }
-  .rows em.warn { color: #B7791F; }
-  .tools { margin-top: 2.5rem; display: grid; grid-template-columns: 1.5fr 1fr; gap: 1.25rem; }
-  .tool { border-radius: 18px; padding: 2rem; }
-  .tool.main { background: var(--mist); }
-  .tool.soon { border: 1.5px dashed var(--line); }
-  .tag { display: inline-block; font-size: 0.85rem; font-weight: 600; color: var(--accent); background: var(--accent-soft); padding: 0.25rem 0.7rem; border-radius: 99px; }
-  .tool h3 { margin-top: 1rem; font-size: 1.6rem; font-weight: 700; }
-  .tool p { margin-top: 0.6rem; color: var(--muted); max-width: 46ch; }
-  .ticks { list-style: none; padding: 0; margin-top: 1.1rem; }
-  .ticks li { padding-left: 1.6rem; position: relative; margin-top: 0.4rem; }
-  .ticks li::before { content: ""; position: absolute; left: 0; top: 0.5em; width: 0.65rem; height: 0.35rem; border-left: 2px solid var(--accent); border-bottom: 2px solid var(--accent); transform: rotate(-45deg); }
-  .tool .btn { margin-top: 1.5rem; }
-  .text-link { display: inline-block; margin-top: 1.25rem; font-weight: 600; color: var(--accent); }
+  .sector p { margin-top: 0.5rem; color: var(--muted); font-size: 0.97rem; }
+  .for { margin-top: 1.6rem; color: var(--muted); }
+  .for a { color: var(--accent); font-weight: 600; }
 
-  .steps { list-style: none; padding: 0; margin-top: 2.5rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2rem; counter-reset: step; }
-  .steps li { counter-increment: step; border-top: 2px solid var(--ink); padding-top: 1.25rem; }
-  .steps li::before { content: counter(step); font: 700 0.95rem "Sora", sans-serif; color: var(--accent); }
-  .steps h3 { margin-top: 0.4rem; font-size: 1.25rem; font-weight: 600; }
-  .steps p { margin-top: 0.4rem; color: var(--muted); }
+  /* How we work */
+  .steps { list-style: none; padding: 0; margin-top: 2rem; display: grid; grid-template-columns: repeat(3, 1fr); gap: 2.5rem; counter-reset: step; }
+  .steps li { counter-increment: step; }
+  .steps li::before { content: counter(step); display: grid; place-items: center; width: 40px; height: 40px; border-radius: 50%; background: var(--accent-soft); color: var(--accent); font-weight: 700; }
+  .steps h3 { margin-top: 1.1rem; font-size: 1.25rem; font-weight: 600; }
+  .steps p { margin-top: 0.45rem; color: var(--muted); }
 
-  .proof { border-bottom: 1px solid var(--line); background: var(--bg); }
-  .proof-list { list-style: none; display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; padding-top: 1.6rem; padding-bottom: 1.6rem; }
-  .proof-list li { border-left: 3px solid var(--accent); padding-left: 0.9rem; color: var(--muted); font-size: 0.98rem; line-height: 1.45; }
-  .proof-list strong { display: block; font-family: "Sora", "Instrument Sans", system-ui, sans-serif; font-size: 1.35rem; color: var(--ink); }
-  .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 3rem; align-items: start; }
-  .about .intro + .intro { margin-top: 1rem; }
-  .pillars { list-style: none; padding: 0; display: grid; gap: 1rem; }
-  .pillars li { background: var(--bg); border: 1px solid var(--line); border-radius: 14px; padding: 1.3rem 1.4rem; }
-  .pillars h3 { font-size: 1.15rem; font-weight: 600; }
-  .pillars p { margin-top: 0.35rem; color: var(--muted); }
-  .band { background: var(--band); color: var(--band-text); border-radius: 24px; padding: 3.5rem; display: grid; grid-template-columns: 1.4fr 1fr; gap: 2rem; align-items: center; }
-  .band h2 { color: var(--band-text); }
-  .band p { margin-top: 0.8rem; color: var(--band-muted); font-size: 1.1rem; max-width: 46ch; }
-  .band .cta { justify-self: end; text-align: right; }
-  .band .btn { background: var(--accent); color: #fff; }
-  .band .btn:hover { background: var(--note); color: #0E1B2E; }
-  .band small { display: block; margin-top: 0.75rem; color: var(--band-muted); }
+  /* About */
+  .about { display: grid; grid-template-columns: 1.1fr 1fr; gap: 4rem; align-items: start; }
+  .about h2 { font-size: clamp(1.9rem, 3.8vw, 2.7rem); letter-spacing: -0.025em; }
+  .about .copy p { margin-top: 1.1rem; color: var(--muted); font-size: 1.08rem; max-width: 50ch; }
+  .name-note { margin-top: 1.6rem; padding: 1.1rem 1.3rem; border-left: 3px solid var(--accent); background: var(--paper); border-radius: 0 12px 12px 0; color: var(--text); }
+  .name-note b { color: var(--ink); }
+  .stats { list-style: none; padding: 0; display: grid; gap: 1px; background: var(--line); border-radius: 16px; overflow: hidden; }
+  .stats li { background: var(--paper); padding: 1.5rem 1.6rem; display: grid; grid-template-columns: 8.5rem 1fr; gap: 1rem; align-items: baseline; }
+  .stats strong { font-size: 1.7rem; font-weight: 800; letter-spacing: -0.03em; color: var(--ink); }
+  .stats span { color: var(--muted); }
 
-  .contact { display: grid; grid-template-columns: 1fr 1.3fr; gap: 3rem; align-items: start; }
-  .direct { margin-top: 1.5rem; color: var(--muted); }
+
+  /* Contact */
+  .contact { display: grid; grid-template-columns: 1fr 1.3fr; gap: 4rem; align-items: start; }
+  .contact h2 { font-size: clamp(1.9rem, 3.8vw, 2.7rem); letter-spacing: -0.025em; }
+  .contact .copy p { margin-top: 0.9rem; color: var(--muted); font-size: 1.08rem; max-width: 40ch; }
   .direct a { color: var(--accent); font-weight: 600; word-break: break-word; }
-  .form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.25rem; background: var(--bg); border: 1px solid var(--line); border-radius: 18px; padding: 2rem; }
+  .form { display: grid; grid-template-columns: 1fr 1fr; gap: 1rem 1.25rem; background: var(--paper); border-radius: 18px; padding: 2rem; box-shadow: inset 0 0 0 1px var(--line); }
   .field { display: flex; flex-direction: column; gap: 0.4rem; }
   .full { grid-column: 1 / -1; }
-  .field label { font-weight: 600; font-size: 0.95rem; }
+  .field label { font-weight: 600; font-size: 0.95rem; color: var(--ink); }
   .opt { font-weight: 400; color: var(--muted); }
-  .field input, .field textarea {
-    font: inherit; color: var(--text); background: var(--bg);
-    border: 1.5px solid var(--line); border-radius: 10px; padding: 0.75rem 0.9rem; width: 100%;
-  }
+  .field input, .field textarea { font: inherit; color: var(--text); background: var(--paper); border: 1.5px solid var(--line); border-radius: 8px; padding: 0.75rem 0.9rem; width: 100%; }
   .field textarea { resize: vertical; min-height: 120px; }
   .field input:focus, .field textarea:focus { outline: none; border-color: var(--accent); box-shadow: 0 0 0 3px var(--accent-soft); }
-  .field input[aria-invalid="true"], .field textarea[aria-invalid="true"] { border-color: #C2410C; }
+  .field [aria-invalid="true"] { border-color: var(--err); }
   .honey { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
   .send-row { display: flex; align-items: center; gap: 1rem; flex-wrap: wrap; }
-  .send-row .btn { border: 0; cursor: pointer; font: inherit; font-weight: 600; }
   .send-row .btn[disabled] { opacity: 0.6; cursor: wait; }
   .status { color: var(--muted); }
   .status.ok { color: var(--accent); font-weight: 600; }
-  .status.err { color: #C2410C; font-weight: 600; }
-  footer { padding: 2.5rem 0; color: var(--muted); font-size: 0.95rem; border-top: 1px solid var(--line); }
+  .status.err { color: var(--err); font-weight: 600; }
 
-  @media (max-width: 900px) {
-    .pains, .sectors { grid-template-columns: repeat(2, 1fr); }
+  /* Footer */
+  footer { border-top: 1px solid var(--line); padding: 3.5rem 0 2.5rem; font-size: 0.97rem; }
+  .foot { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 2rem; }
+  .foot p { margin-top: 0.8rem; color: var(--muted); max-width: 32ch; }
+  .foot h3 { font-size: 0.95rem; font-weight: 600; color: var(--ink); }
+  .foot ul { list-style: none; padding: 0; margin-top: 0.8rem; }
+  .foot li { margin-top: 0.45rem; color: var(--muted); }
+  .foot li a { color: var(--muted); text-decoration: none; }
+  .foot li a:hover { color: var(--accent); }
+  .soon { font-size: 0.85rem; }
+  .legal { margin-top: 3rem; padding-top: 1.5rem; border-top: 1px solid var(--line); color: var(--muted); font-size: 0.9rem; }
+
+  @media (max-width: 1000px) {
+    nav { display: none; }
+    .header-right { margin-left: auto; }
+    .sectors { grid-template-columns: repeat(2, 1fr); }
+    .family, .lineup { grid-template-columns: 1fr; }
+    .foot { grid-template-columns: 1fr 1fr; }
   }
   @media (max-width: 760px) {
-    .hero { padding: 2.5rem 0 3.5rem; }
-    .hero .wrap, .tools, .steps, .band, .contact, .form, .proof-list, .about { grid-template-columns: 1fr; }
+    .hero { padding: 3rem 0 3.5rem; }
+    section { padding: 3.75rem 0; }
+    .hero-grid, .sec-head, .steps, .about, .contact, .form { grid-template-columns: 1fr; }
+    .hero-grid, .about, .contact { gap: 2.5rem; }
+    .worries { padding: 1.5rem 1.4rem 1.3rem; }
+    .lineup, .next { padding: 1.7rem; }
     .form { padding: 1.4rem; }
-    .send-row .btn { width: 100%; }
-    .pains, .sectors { grid-template-columns: 1fr; }
-    .visual { min-height: 0; display: flex; flex-wrap: wrap; gap: 0.6rem; }
-    .visual .note { position: static; flex: 1 1 0; min-width: 0; width: auto; font-size: 0.82rem; padding: 0.7rem 0.6rem 0.8rem; }
-    .visual .note:nth-of-type(1) { transform: rotate(-3deg); }
-    .visual .note:nth-of-type(2) { transform: rotate(2deg); }
-    .visual .note:nth-of-type(3) { transform: rotate(-2deg); }
-    .panel { position: static; width: 100%; margin-top: 1.25rem; flex-basis: 100%; }
-    .band { padding: 2.25rem 1.5rem; }
-    .band .cta { justify-self: start; text-align: left; }
-    section { padding: 3.5rem 0; }
+    .stats li { grid-template-columns: 1fr; gap: 0.2rem; }
   }
-
-  .header-right { display: flex; align-items: center; gap: 0.75rem; }
-  .lang { display: flex; border: 1.5px solid var(--line); border-radius: 10px; overflow: hidden; }
-  .lang button {
-    font: 600 0.85rem "Instrument Sans", system-ui, sans-serif; color: var(--muted);
-    background: transparent; border: 0; padding: 0.5rem 0.7rem; cursor: pointer; min-height: 40px;
-  }
-  .lang button + button { border-left: 1.5px solid var(--line); }
-  .lang button[aria-pressed="true"] { background: var(--ink); color: var(--bg); }
-  .lang button:hover:not([aria-pressed="true"]) { color: var(--accent); }
-  @media (max-width: 520px) {
+  @media (max-width: 560px) {
+    .sectors, .foot { grid-template-columns: 1fr; }
     .header-cta { display: none; }
-    .actions .btn { flex: 1 1 100%; text-align: center; }
+    .actions .btn, .send-row .btn { width: 100%; }
   }
 </style>
 </head>
 <body>
 
 <header>
-  <div class="wrap">
-    <a class="logo" href="#">Cisma<b>Free</b></a>
+  <div class="wrap bar">
+    <a class="logo" href="#top" aria-label="CismaFree home">
+      <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0F8A62"/><path d="M7 13c2.2-2.6 4.4-2.6 6.6 0s4.4 2.6 6.6 0 3.6-2.2 4.8-1.2" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2.2" stroke-linecap="round"/><path d="M7 21h18" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>
+      CismaFree
+    </a>
+    <nav aria-label="Main">
+      <a href="#products" data-i18n="nav_products">Products</a>
+      <a href="#who" data-i18n="nav_who">Who we help</a>
+      <a href="#how" data-i18n="nav_how">How we work</a>
+      <a href="#about" data-i18n="nav_about">About</a>
+    </nav>
     <div class="header-right">
       <div class="lang" role="group" aria-label="Language">
         <button type="button" data-lang="en" aria-pressed="true">EN</button>
         <button type="button" data-lang="pt" aria-pressed="false">PT</button>
       </div>
-      <a class="btn ghost header-cta" href="#check-up" data-i18n="nav_cta">Free check-up</a>
+      <a class="btn header-cta" href="#contact" data-i18n="nav_cta">Free check-up</a>
     </div>
   </div>
 </header>
 
-<main>
+<main id="top">
   <section class="hero" aria-labelledby="hero-title">
-    <div class="wrap">
+    <div class="wrap hero-grid">
       <div>
-        <h1 id="hero-title" data-i18n="h1">Simple software for small businesses, set up for you.</h1>
-        <p class="lead" data-i18n="lead">Swap paper registers, spreadsheets and WhatsApp chaos for easy tools that save hours every week. We do the setup, so there's nothing technical to learn.</p>
+        <p class="kicker" data-i18n="kicker">A software studio for small businesses</p>
+        <h1 id="hero-title" data-i18n="h1">Software that takes the worry out of running a small business.</h1>
+        <p class="lead" data-i18n="lead">Simple tools for different kinds of small business, set up and looked after by us.</p>
         <div class="actions">
-          <a class="btn" href="#contact" data-i18n="btn_chat">Book a free chat</a>
-          <a class="btn ghost" href="#who" data-i18n="btn_who">Who we help</a>
+          <a class="btn" href="#contact" data-i18n="btn_checkup">Book a free check-up</a>
+          <a class="btn ghost" href="#products" data-i18n="btn_products">See our products</a>
         </div>
-        <p class="who" data-i18n="who_line">For clubs, coaches, cleaning companies and other small teams.</p>
       </div>
 
-      <div class="visual" aria-hidden="true">
-        <div class="note"><span data-i18n="note1">Who came to Saturday's session?</span></div>
-        <div class="note"><span data-i18n="note2">Did anyone clean site 3 today?</span></div>
-        <div class="note"><span data-i18n="note3">Chase payments in the group chat</span></div>
+      <div class="worries" aria-labelledby="worries-head">
+        <p class="worries-head" id="worries-head" data-i18n="w_head">The weekly worries we take off your plate</p>
+        <ul>
+          <li><span data-i18n="w1">Paper registers that go missing</span></li>
+          <li><span data-i18n="w2">Important messages lost in WhatsApp</span></li>
+          <li><span data-i18n="w3">Spreadsheets only you understand</span></li>
+          <li><span data-i18n="w4">Chasing payments by hand every week</span></li>
+        </ul>
+        <p class="sorted">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          <span data-i18n="w_done">Replaced by one simple system, set up for you</span>
+        </p>
       </div>
     </div>
   </section>
 
-  <div class="proof" aria-label="Our experience">
-    <ul class="wrap proof-list">
-      <li><strong data-i18n="pf1t">7 years</strong> <span data-i18n="pf1s">getting businesses up and running on new software</span></li>
-      <li><strong data-i18n="pf2t">10+ years</strong> <span data-i18n="pf2s">in customer service</span></li>
-      <li><strong data-i18n="pf3t">Global brands</strong> <span data-i18n="pf3s">experience with teams in drinks, batteries and water treatment</span></li>
-    </ul>
-  </div>
-
-  <section class="mist" aria-labelledby="pains-title">
+  <section id="products" class="wash" aria-labelledby="products-title">
     <div class="wrap">
-      <h2 id="pains-title" data-i18n="pains_h">You started a business to coach, clean or build. Not to do paperwork.</h2>
-      <ul class="pains">
-        <li><strong data-i18n="p1t">Paper and clipboards</strong><span data-i18n="p1s">Registers, timesheets and checklists that get lost or never filed.</span></li>
-        <li><strong data-i18n="p2t">WhatsApp chaos</strong><span data-i18n="p2s">Important messages buried in group chats.</span></li>
-        <li><strong data-i18n="p3t">Messy spreadsheets</strong><span data-i18n="p3s">Only you understand them, and they're never up to date.</span></li>
-        <li><strong data-i18n="p4t">Chasing people</strong><span data-i18n="p4s">Payments, staff, parents and clients, all by hand, every week.</span></li>
-      </ul>
+      <div class="sec-head">
+        <h2 id="products-title" data-i18n="prod_h">One studio. A product for each kind of business.</h2>
+        <p data-i18n="prod_p">Each product is built for one type of business, with its own name and look. The same team sets up and supports every one.</p>
+      </div>
+
+      <div class="family">
+        <article class="lineup" aria-labelledby="lu-title">
+          <div>
+            <div class="lu-top">
+              <span class="lu-mark"><i><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10.5l4 4L16 6" fill="none" stroke="#0A0B0C" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/></svg></i>Line<b>Up</b></span>
+              <span class="live" data-i18n="live">Live now</span>
+            </div>
+            <h3 id="lu-title" data-i18n="lu_h">Attendance for gyms and martial arts clubs</h3>
+            <p data-i18n="lu_p">Members check in on their own phone with a PIN. You see who trained and who’s gone quiet, without a paper register.</p>
+            <ul class="lu-ticks">
+              <li data-i18n="lu_t1">No tablet or extra hardware</li>
+              <li data-i18n="lu_t2">Attendance by class and by member</li>
+              <li data-i18n="lu_t3">Set up for you, ready in days</li>
+            </ul>
+            <a class="btn lu-btn" href="https://lineup.cismafree.com/" data-i18n="lu_btn">Visit LineUp</a>
+          </div>
+          <div class="phone" aria-hidden="true">
+            <small data-i18n="ph_small">Evening class</small>
+            <strong data-i18n="ph_big">Enter your PIN</strong>
+            <div class="pin"><span></span><span></span><span></span><span></span></div>
+            <div class="keys"><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span><span>6</span><span>7</span><span>8</span><span>9</span></div>
+            <div class="checked" data-i18n="ph_ok">Checked in. Have a good session!</div>
+          </div>
+        </article>
+
+        <article class="next" aria-labelledby="next-title">
+          <span class="slot" aria-hidden="true">+</span>
+          <h3 id="next-title" data-i18n="next_h">Your business could be next</h3>
+          <p data-i18n="next_p">Coaches, cleaners, studios: tell us what slows your week down.</p>
+          <a class="link" href="#contact" data-i18n="next_link">Tell us about your business</a>
+        </article>
+      </div>
+
     </div>
   </section>
 
   <section id="who" aria-labelledby="who-title">
     <div class="wrap">
-      <h2 id="who-title" data-i18n="who_h">Who we help</h2>
-      <p class="intro" data-i18n="who_intro">If your business runs on people turning up, jobs getting done and payments coming in, we can probably save you time.</p>
+      <div class="sec-head">
+        <h2 id="who-title" data-i18n="who_h">Who we help</h2>
+        <p data-i18n="who_p">Small businesses that recognise any of these.</p>
+      </div>
       <div class="sectors">
-        <div class="sector"><h3 data-i18n="s1t">Gyms and martial arts clubs</h3><p data-i18n="s1p">Track who trains, spot members who've gone quiet, and drop the paper register.</p></div>
-        <div class="sector"><h3 data-i18n="s2t">Sports coaches and academies</h3><p data-i18n="s2p">Know who came to each session, keep parents in the loop, and stop chasing payments by hand.</p></div>
-        <div class="sector"><h3 data-i18n="s3t">Cleaning companies</h3><p data-i18n="s3p">Show clients every visit was done, see which sites are covered, and cut the timesheet admin.</p></div>
-        <div class="sector"><h3 data-i18n="s4t">Other small teams</h3><p data-i18n="s4p">Studios, trades and local services. If it's still on paper or WhatsApp, let's talk.</p></div>
+        <div class="sector" style="background: var(--wash)"><h3 data-i18n="s1t">Your week disappears</h3><p data-i18n="s1p">Busy all day, but you can’t say where the hours went.</p></div>
+        <div class="sector" style="background: var(--wash)"><h3 data-i18n="s2t">You can’t prove what happened</h3><p data-i18n="s2p">Who came, which job was done and when, with no record to show.</p></div>
+        <div class="sector" style="background: var(--wash)"><h3 data-i18n="s3t">Things slip through the cracks</h3><p data-i18n="s3p">Missed payments, and customers who quietly stop coming.</p></div>
+        <div class="sector" style="background: var(--wash)"><h3 data-i18n="s4t">You’re guessing, not knowing</h3><p data-i18n="s4p">No clear numbers to plan or grow with.</p></div>
       </div>
+      <p class="for" data-i18n="who_for">Clubs, coaches, cleaning companies, studios and local services. Run a gym or martial arts club? <a href="https://lineup.cismafree.com/">LineUp</a> is ready today.</p>
     </div>
   </section>
 
-  <section id="tools" class="mist" aria-labelledby="tools-title">
+  <section id="how" class="wash" aria-labelledby="how-title">
     <div class="wrap">
-      <h2 id="tools-title" data-i18n="how_h">How we help</h2>
-      <p class="intro" data-i18n="how_intro">Use one of our ready-made tools, or let us look at how you work and fix the parts that eat up your week.</p>
-      <div class="tools">
-        <article class="tool main" style="background: var(--bg);">
-          <span class="tag" data-i18n="tag_now">Available now</span>
-          <h3>LineUp</h3>
-          <p data-i18n="lineup_p">Attendance made simple. Members check in on their own phone with a PIN when they arrive, and you see who turned up without lifting a pen.</p>
-          <ul class="ticks">
-            <li data-i18n="t1">No tablet or extra hardware needed</li>
-            <li data-i18n="t2">See attendance by class and by member</li>
-            <li data-i18n="t3">Set up for you, ready in days</li>
-          </ul>
-          <a class="btn" href="https://lineup.cismafree.com/" data-i18n="lineup_btn">Find out more about LineUp</a>
-        </article>
-        <article class="tool soon">
-          <span class="tag" data-i18n="tag_made">Made for you</span>
-          <h3 data-i18n="custom_h">Simple systems, built around you</h3>
-          <p data-i18n="custom_p">We find where your time goes, from bookings and rotas to site checks and payments, and set up simple systems that do the chasing for you.</p>
-          <a class="text-link" href="#check-up" data-i18n="custom_link">Start with a free check-up</a>
-        </article>
+      <div>
+        <h2 id="how-title" data-i18n="how_h">How we work</h2>
       </div>
-    </div>
-  </section>
-
-  <section aria-labelledby="how-title">
-    <div class="wrap">
-      <h2 id="how-title" data-i18n="steps_h">How it works</h2>
       <ol class="steps">
-        <li><h3 data-i18n="st1t">We chat</h3><p data-i18n="st1p">You tell us how you run things today and where your time goes.</p></li>
-        <li><h3 data-i18n="st2t">We set it up</h3><p data-i18n="st2p">We pick or build the right tool, set it up, and show you and your team how it works.</p></li>
-        <li><h3 data-i18n="st3t">You get time back</h3><p data-i18n="st3p">Less admin, and more time for the work you actually enjoy.</p></li>
+        <li><h3 data-i18n="st1t">We talk</h3><p data-i18n="st1p">You tell us where your time goes.</p></li>
+        <li><h3 data-i18n="st2t">We set it up</h3><p data-i18n="st2p">We set up the right tool and show your team.</p></li>
+        <li><h3 data-i18n="st3t">We stay with you</h3><p data-i18n="st3p">We check in and fix what gets in the way.</p></li>
       </ol>
     </div>
   </section>
 
-  <section id="about" class="mist" aria-labelledby="about-title">
+  <section id="about" aria-labelledby="about-title">
     <div class="wrap about">
-      <div>
-        <h2 id="about-title" data-i18n="ab_h">Who's behind CismaFree</h2>
-        <p class="intro" data-i18n="ab_p1">CismaFree is built on years of helping businesses start using new software, and keep using it. That work covered manufacturing, energy and asset management, for teams from fast-growing start-ups to multinationals in drinks, batteries and water treatment.</p>
-        <p class="intro" data-i18n="ab_p2">Now we bring the same care to small businesses: simple tools, set up properly, with a real person to help when you need it.</p>
+      <div class="copy">
+        <h2 id="about-title" data-i18n="ab_h">Why CismaFree</h2>
+        <p data-i18n="ab_p1">CismaFree is built on years of helping businesses start using new software, and keep using it, across manufacturing, energy and asset management.</p>
+        <p class="name-note" data-i18n="ab_name"><b>About the name.</b> “Cisma” is Portuguese for a nagging worry. CismaFree means free of it.</p>
       </div>
-      <ul class="pillars">
-        <li><h3 data-i18n="pl1t">Getting you started</h3><p data-i18n="pl1p">We set everything up and show your team how it works, so it's used from day one, not left in a drawer.</p></li>
-        <li><h3 data-i18n="pl2t">Keeping it working</h3><p data-i18n="pl2p">We check in, listen and fix what gets in the way, the way we've looked after customers for years.</p></li>
-        <li><h3 data-i18n="pl3t">Helping you grow</h3><p data-i18n="pl3p">Fewer people slipping away, payments chased, and clearer numbers to plan with.</p></li>
+      <ul class="stats" aria-label="Our experience">
+        <li><strong data-i18n="pf1t">7 years</strong><span data-i18n="pf1s">getting businesses up and running on new software</span></li>
+        <li><strong data-i18n="pf2t">10+ years</strong><span data-i18n="pf2s">in customer service</span></li>
       </ul>
     </div>
   </section>
 
-  <section id="check-up" aria-labelledby="checkup-title">
-    <div class="wrap">
-      <div class="band">
-        <div>
-          <h2 id="checkup-title" data-i18n="band_h">Find out where your week is going</h2>
-          <p data-i18n="band_p">Book a free check-up. We'll look at how you run things today and show you where you could save hours each week. It's free, with nothing to buy.</p>
-        </div>
-        <div class="cta">
-          <a class="btn" href="#contact" data-i18n="btn_chat">Book a free chat</a>
-        </div>
-      </div>
-    </div>
-  </section>
-  <section id="contact" class="mist" aria-labelledby="contact-title">
+
+  <section id="contact" class="wash" aria-labelledby="contact-title">
     <div class="wrap contact">
-      <div>
-        <h2 id="contact-title" data-i18n="contact_h">Contact us</h2>
-        <p class="intro" data-i18n="contact_intro">Tell us a little about your business and what's taking up your time. We'll reply within two working days.</p>
-        <p class="direct"><span data-i18n="contact_direct">Prefer email? Write to us at</span> <a href="mailto:cismafree@gmail.com">cismafree@gmail.com</a></p>
+      <div class="copy">
+        <h2 id="contact-title" data-i18n="contact_h">Book a free check-up</h2>
+        <p data-i18n="contact_p">Tell us what’s taking up your time and we’ll show you where you could save hours. Free, with nothing to buy.</p>
+        <p class="direct"><span data-i18n="contact_direct">Prefer email? Write to</span> <a href="mailto:cismafree@gmail.com">cismafree@gmail.com</a></p>
       </div>
       <form id="contact-form" class="form" novalidate>
         <div class="field">
@@ -401,7 +410,7 @@
           <input id="f-phone" name="phone" type="tel" autocomplete="tel">
         </div>
         <div class="field full">
-          <label for="f-message" data-i18n="f_message">What's taking up your time?</label>
+          <label for="f-message" data-i18n="f_message">What’s taking up your time?</label>
           <textarea id="f-message" name="message" rows="5" required></textarea>
         </div>
         <input type="text" name="_honey" class="honey" tabindex="-1" autocomplete="off" aria-hidden="true">
@@ -415,80 +424,102 @@
 </main>
 
 <footer>
-  <div class="wrap">© 2026 CismaFree</div>
+  <div class="wrap">
+    <div class="foot">
+      <div>
+        <a class="logo" href="#top" aria-label="CismaFree home">
+          <svg viewBox="0 0 32 32" aria-hidden="true"><rect width="32" height="32" rx="8" fill="#0F8A62"/><path d="M7 13c2.2-2.6 4.4-2.6 6.6 0s4.4 2.6 6.6 0 3.6-2.2 4.8-1.2" fill="none" stroke="#fff" stroke-opacity=".45" stroke-width="2.2" stroke-linecap="round"/><path d="M7 21h18" stroke="#fff" stroke-width="2.6" stroke-linecap="round"/></svg>
+          CismaFree
+        </a>
+        <p data-i18n="foot_p">Simple software for small businesses, set up for you.</p>
+      </div>
+      <div>
+        <h3 data-i18n="foot_products">Products</h3>
+        <ul>
+          <li><a href="https://lineup.cismafree.com/">LineUp</a></li>
+          <li class="soon" data-i18n="foot_more">More on the way</li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="foot_company">Company</h3>
+        <ul>
+          <li><a href="#who" data-i18n="nav_who">Who we help</a></li>
+          <li><a href="#how" data-i18n="nav_how">How we work</a></li>
+          <li><a href="#about" data-i18n="nav_about">About</a></li>
+        </ul>
+      </div>
+      <div>
+        <h3 data-i18n="foot_contact">Contact</h3>
+        <ul>
+          <li><a href="#contact" data-i18n="nav_cta">Free check-up</a></li>
+          <li><a href="mailto:cismafree@gmail.com">cismafree@gmail.com</a></li>
+        </ul>
+      </div>
+    </div>
+    <p class="legal">© 2026 CismaFree</p>
+  </div>
 </footer>
-
 
 <script>
 const T = {
   pt: {
-    title: "CismaFree – Sistemas simples que economizam horas toda semana",
+    title: "CismaFree – Software que tira a preocupação de tocar um pequeno negócio",
+    nav_products: "Produtos", nav_who: "Para quem é", nav_how: "Como trabalhamos", nav_about: "Sobre",
     nav_cta: "Diagnóstico grátis",
-    h1: "Software simples para pequenas empresas, configurado para você.",
-    lead: "Troque listas em papel, planilhas e o caos do WhatsApp por ferramentas fáceis que economizam horas toda semana. Nós fazemos a configuração, sem nada técnico para aprender.",
-    btn_chat: "Agende uma conversa grátis",
-    btn_who: "Para quem é",
-    who_line: "Para clubes, treinadores, empresas de limpeza e outras pequenas equipes.",
-    note1: "Quem veio no treino de sábado?",
-    note2: "Alguém limpou o local 3 hoje?",
-    note3: "Cobrar pagamentos no grupo",
-    panel_title: "Esta semana", panel_sub: "Atualizado ao vivo",
-    r1t: "Treino de futebol de sábado", r1s: "<em>22 presentes</em>",
-    r2t: "Limpeza do escritório, Unidade 4", r2s: "<em>Feita</em> às 7h42",
-    r3t: "Mensalidades", r3s: '<em class="warn">3 para cobrar</em>',
+    kicker: "Um estúdio de software para pequenas empresas",
+    h1: "Software que tira a preocupação de tocar um pequeno negócio.",
+    lead: "Ferramentas simples para diferentes tipos de pequenas empresas, configuradas e cuidadas por nós.",
+    btn_checkup: "Agende um diagnóstico grátis", btn_products: "Veja nossos produtos",
+    w_head: "As preocupações da semana que tiramos de você",
+    w1: "Listas de presença em papel que se perdem",
+    w2: "Mensagens importantes perdidas no WhatsApp",
+    w3: "Planilhas que só você entende",
+    w4: "Cobrar pagamentos na mão toda semana",
+    w_done: "Substituídas por um sistema simples, configurado para você",
+    prod_h: "Um estúdio. Um produto para cada tipo de negócio.",
+    prod_p: "Cada produto é feito para um tipo de negócio, com nome e visual próprios. A mesma equipe configura e dá suporte a todos.",
+    live: "Disponível agora",
+    lu_h: "Controle de presença para academias e clubes de artes marciais",
+    lu_p: "Os alunos fazem check-in pelo próprio celular com um PIN. Você vê quem treinou e quem sumiu, sem lista em papel.",
+    lu_t1: "Sem tablet ou equipamento extra", lu_t2: "Presença por aula e por aluno", lu_t3: "Configurado para você, pronto em poucos dias",
+    lu_btn: "Conheça o LineUp",
+    ph_small: "Aula da noite", ph_big: "Digite seu PIN", ph_ok: "Check-in feito. Bom treino!",
+    next_h: "O seu negócio pode ser o próximo",
+    next_p: "Treinadores, empresas de limpeza, estúdios: conte o que atrasa a sua semana.",
+    next_link: "Conte sobre o seu negócio",
+    who_h: "Para quem é",
+    who_p: "Pequenas empresas que se reconhecem em alguma destas situações.",
+    s1t: "A semana some", s1p: "Ocupado o dia todo, mas sem saber para onde foram as horas.",
+    s2t: "Sem como provar o que aconteceu", s2p: "Quem veio, qual serviço foi feito e quando, sem nenhum registro.",
+    s3t: "Coisas escapam", s3p: "Pagamentos esquecidos e clientes que param de vir sem avisar.",
+    s4t: "Você adivinha, em vez de saber", s4p: "Sem números claros para planejar e crescer.",
+    who_for: 'Clubes, treinadores, empresas de limpeza, estúdios e serviços locais. Tem uma academia ou clube de artes marciais? O <a href="https://lineup.cismafree.com/">LineUp</a> já está pronto.',
+    how_h: "Como trabalhamos",
+    st1t: "A gente conversa", st1p: "Você conta para onde vai o seu tempo.",
+    st2t: "A gente configura", st2p: "Configuramos a ferramenta certa e mostramos à sua equipe.",
+    st3t: "A gente continua junto", st3p: "Acompanhamos e resolvemos o que atrapalha.",
+    ab_h: "Por que a CismaFree",
+    ab_p1: "A CismaFree nasce de anos ajudando empresas a começar a usar novos softwares, e a continuar usando, em indústria, energia e gestão de ativos.",
+    ab_name: "<b>Sobre o nome.</b> “Cisma” é aquela preocupação que não sai da cabeça. CismaFree quer dizer livre dela.",
     pf1t: "7 anos", pf1s: "colocando empresas para funcionar com novos softwares",
     pf2t: "Mais de 10 anos", pf2s: "em atendimento ao cliente",
-    pf3t: "Marcas globais", pf3s: "experiência com equipes dos setores de bebidas, baterias e tratamento de água",
-    ab_h: "Quem está por trás da CismaFree",
-    ab_p1: "A CismaFree nasce de anos ajudando empresas a começar a usar novos softwares, e a continuar usando. Esse trabalho passou por indústria, energia e gestão de ativos, com equipes de startups em crescimento a multinacionais de bebidas, baterias e tratamento de água.",
-    ab_p2: "Agora levamos o mesmo cuidado para pequenas empresas: ferramentas simples, bem configuradas, com uma pessoa de verdade para ajudar quando você precisar.",
-    pl1t: "Colocando você para rodar", pl1p: "Configuramos tudo e mostramos à sua equipe como funciona, para ser usado desde o primeiro dia, e não esquecido na gaveta.",
-    pl2t: "Mantendo tudo funcionando", pl2p: "Acompanhamos, ouvimos e resolvemos o que atrapalha, do jeito que cuidamos de clientes há anos.",
-    pl3t: "Ajudando você a crescer", pl3p: "Menos clientes indo embora, pagamentos cobrados e números mais claros para planejar.",
-    pains_h: "Você abriu um negócio para treinar, limpar ou construir. Não para cuidar de papelada.",
-    p1t: "Papel e pranchetas", p1s: "Listas de presença, folhas de ponto e checklists que se perdem ou nunca são arquivados.",
-    p2t: "Caos no WhatsApp", p2s: "Mensagens importantes perdidas nos grupos.",
-    p3t: "Planilhas bagunçadas", p3s: "Só você entende, e nunca estão atualizadas.",
-    p4t: "Correr atrás das pessoas", p4s: "Pagamentos, funcionários, pais e clientes, tudo na mão, toda semana.",
-    who_h: "Para quem é",
-    who_intro: "Se o seu negócio depende de pessoas aparecendo, serviços sendo feitos e pagamentos entrando, provavelmente podemos economizar o seu tempo.",
-    s1t: "Academias e clubes de artes marciais", s1p: "Saiba quem treina, perceba alunos que sumiram e abandone a lista de presença em papel.",
-    s2t: "Treinadores e escolinhas esportivas", s2p: "Saiba quem veio a cada treino, mantenha os pais informados e pare de cobrar pagamentos na mão.",
-    s3t: "Empresas de limpeza", s3p: "Mostre aos clientes que cada visita foi feita, veja quais locais estão cobertos e reduza a papelada das folhas de ponto.",
-    s4t: "Outras pequenas equipes", s4p: "Estúdios, prestadores de serviço e negócios locais. Se ainda está no papel ou no WhatsApp, vamos conversar.",
-    how_h: "Como ajudamos",
-    how_intro: "Use uma das nossas ferramentas prontas, ou deixe a gente entender como você trabalha e resolver o que mais consome a sua semana.",
-    tag_now: "Disponível agora",
-    lineup_p: "Controle de presença simples. Os alunos fazem check-in pelo próprio celular com um PIN ao chegar, e você vê quem apareceu sem pegar numa caneta.",
-    t1: "Sem tablet ou equipamento extra", t2: "Veja a presença por aula e por aluno", t3: "Configurado para você, pronto em poucos dias",
-    lineup_btn: "Saiba mais sobre o LineUp",
-    tag_made: "Feito para você",
-    custom_h: "Sistemas simples, feitos para você",
-    custom_p: "Descobrimos para onde vai o seu tempo, de agendamentos e escalas a vistorias e pagamentos, e montamos sistemas simples que fazem as cobranças por você.",
-    custom_link: "Comece com um diagnóstico grátis",
-    steps_h: "Como funciona",
-    st1t: "A gente conversa", st1p: "Você conta como trabalha hoje e para onde vai o seu tempo.",
-    st2t: "A gente configura", st2p: "Escolhemos ou criamos a ferramenta certa, configuramos e mostramos a você e à sua equipe como funciona.",
-    st3t: "Você ganha tempo", st3p: "Menos papelada e mais tempo para o trabalho que você gosta.",
-    band_h: "Descubra para onde vai a sua semana",
-    band_p: "Agende um diagnóstico grátis. Vamos ver como você trabalha hoje e mostrar onde dá para economizar horas toda semana. É grátis, sem compromisso.",
-    contact_h: "Fale conosco",
-    contact_intro: "Conte um pouco sobre o seu negócio e o que mais consome o seu tempo. Respondemos em até dois dias úteis.",
+    contact_h: "Agende um diagnóstico grátis",
+    contact_p: "Conte o que mais consome o seu tempo e mostramos onde dá para economizar horas. Grátis, sem compromisso.",
     contact_direct: "Prefere e-mail? Escreva para",
     f_name: "Seu nome", f_business: "Nome do negócio", f_email: "E-mail", f_phone: "Telefone", f_optional: "(opcional)",
     f_message: "O que mais consome o seu tempo?", f_send: "Enviar mensagem",
+    foot_p: "Software simples para pequenas empresas, configurado para você.",
+    foot_products: "Produtos", foot_more: "Mais a caminho", foot_company: "Empresa", foot_contact: "Contato",
     msg_sending: "Enviando...", msg_ok: "Obrigado! Recebemos a sua mensagem e vamos responder em breve.",
-    msg_err: "Não foi possível enviar. Escreva para cismafree@gmail.com.", msg_missing: "Preencha o seu nome, e-mail e mensagem."
+    msg_err: "A mensagem não foi enviada. Escreva para cismafree@gmail.com.", msg_missing: "Preencha o seu nome, e-mail e mensagem."
   }
-
 };
 
-// Save the English text already on the page
+// Keep the English text already on the page
 T.en = { title: document.title };
-document.querySelectorAll("[data-i18n]").forEach(el => { T.en[el.dataset.i18n] = el.innerHTML; });
+document.querySelectorAll("[data-i18n]").forEach(el => { if (!(el.dataset.i18n in T.en)) T.en[el.dataset.i18n] = el.innerHTML; });
 
 const LANG_CODES = { en: "en-GB", pt: "pt-BR" };
-
 function setLang(lang) {
   if (!T[lang]) lang = "en";
   const dict = T[lang];
@@ -501,23 +532,22 @@ function setLang(lang) {
   document.querySelectorAll(".lang button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.lang === lang)));
   try { localStorage.setItem("cf-lang", lang); } catch (e) {}
 }
-
 document.querySelectorAll(".lang button").forEach(b => b.addEventListener("click", () => setLang(b.dataset.lang)));
 
-// Start with: saved choice, then the visitor's browser language, then English
-let start = "en";
-try { start = localStorage.getItem("cf-lang") || ""; } catch (e) { start = ""; }
+// Start with the saved choice, then the browser language, then English
+let start = "";
+try { start = localStorage.getItem("cf-lang") || ""; } catch (e) {}
 if (!start) {
   const b = (navigator.language || "en").slice(0, 2).toLowerCase();
   start = T[b] ? b : "en";
 }
 if (start !== "en") setLang(start);
 
-// Contact form: sends to cismafree@gmail.com via FormSubmit (no server needed)
+// Contact form: sends to cismafree@gmail.com via FormSubmit
 const MSG_EN = {
   msg_sending: "Sending...",
-  msg_ok: "Thank you! We've got your message and will reply soon.",
-  msg_err: "Sorry, that didn't send. Please email cismafree@gmail.com.",
+  msg_ok: "Thank you! We’ve got your message and will reply soon.",
+  msg_err: "Your message didn’t send. Please email cismafree@gmail.com.",
   msg_missing: "Please fill in your name, email and message."
 };
 function msg(key) {
