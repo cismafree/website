@@ -166,6 +166,12 @@
   .foot li a:hover { color: var(--accent); }
   .foot li small { color: var(--muted); }
   .legal { margin-top: 2rem; font-size: 0.85rem; }
+  .legal a { color: var(--muted); }
+  .legal a:hover { color: var(--accent); }
+  .addr { font-style: normal; color: var(--muted); }
+  .contact .addr { margin-top: 1rem; line-height: 1.5; }
+  .fine { font-size: 0.9rem; color: var(--muted); }
+  .fine a { color: var(--accent); }
 
   @media (max-width: 960px) {
     .mast nav { display: none; }
@@ -275,6 +281,7 @@
             <div class="copy">
               <p data-i18n="contact_intro">A few lines is enough. The check-up is free, with nothing to buy, and we reply within two working days.</p>
               <p class="direct"><span data-i18n="contact_direct">Prefer email?</span> <a href="mailto:cismafree@gmail.com">cismafree@gmail.com</a></p>
+              <address class="addr">CismaFree<br>121 High Street<br>Rushden<br>NN10 0NZ</address>
             </div>
             <form id="contact-form" class="form" novalidate>
               <div class="field">
@@ -302,6 +309,7 @@
                 <button class="btn" type="submit" data-i18n="f_send">Send message</button>
                 <p id="form-status" class="status" role="status" aria-live="polite"></p>
               </div>
+              <p class="full fine" data-i18n="f_privacy">We use your details only to reply to you. See our <a href="privacy.html">privacy notice</a>.</p>
             </form>
           </div>
         </div>
@@ -326,10 +334,11 @@
         <ul>
           <li><a href="#contact" data-i18n="nav_cta">Free check-up</a></li>
           <li><a href="mailto:cismafree@gmail.com">cismafree@gmail.com</a></li>
+          <li><address class="addr">121 High Street, Rushden, NN10 0NZ</address></li>
         </ul>
       </div>
     </div>
-    <p class="legal">© 2026 CismaFree</p>
+    <p class="legal">© 2026 CismaFree · <a href="privacy.html" data-i18n="foot_privacy">Privacy</a></p>
   </div>
 </footer>
 
@@ -376,6 +385,7 @@ const T = {
     contact_direct: "Prefere e-mail?",
     f_name: "Seu nome", f_business: "Nome do negócio", f_email: "E-mail", f_phone: "Telefone", f_optional: "(opcional)",
     f_message: "O que mais consome o seu tempo?", f_send: "Enviar mensagem",
+    f_privacy: 'Usamos os seus dados só para responder a você. Veja o nosso <a href="privacy.html">aviso de privacidade</a>.', foot_privacy: "Privacidade",
     foot_p: "Software feito para o jeito que o seu negócio funciona.", foot_products: "Produtos", foot_contact: "Contato",
     msg_sending: "Enviando...", msg_ok: "Obrigado! Recebemos a sua mensagem e vamos responder em breve.",
     msg_err: "A mensagem não foi enviada. Escreva para cismafree@gmail.com.", msg_missing: "Preencha o seu nome, e-mail e mensagem."
